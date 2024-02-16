@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function TodoCounter({completed, total}) {
-    return (
-        <p>Haz completado {completed || '0'} de {total || '0'} tareas</p>
-    )
+function TodoCounter(props) {
+  return (
+    <p>
+      Haz completado {props.completed || "0"} de {props.total || "0"} tareas
+    </p>
+  );
 }
 
-export {TodoCounter}
+export { TodoCounter };
