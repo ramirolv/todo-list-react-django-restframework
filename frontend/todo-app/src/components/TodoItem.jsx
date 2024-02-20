@@ -2,20 +2,19 @@ import React from "react";
 
 function TodoItem(props) {
   return (
-    <li className="list-group-item list-group-item-action alert alert-light d-flex align-items-center">
-      <span>
-        <i
-          className={`bi ${
-            props.completed ? "bi-check-circle-fill" : "bi-circle"
-          } me-2`}
-        >
-          {" "}
-        </i>
+    <li className={`${props.completed ? 'alert-success' : 'alert-light'} alert alert-dismissible py-1 d-flex align-items-center text-start fade show`}>
+        <span className="fs-3" onClick={props.onCompleted}>
+          <i
+            className={`bi ${
+              props.completed ? "bi-check-circle-fill" : "bi-circle"
+            } me-2`}
+          >
+          </i>
+        </span>
+      <span className={`${props.completed ? 'fst-italic text-decoration-line-through' : ''}`}>
         {props.text || ""}
       </span>
-      <button className="btn btn-sm btn-secondary rounded-pill p-0 position-absolute top-0 end-0 translate-middle">
-        <i className="bi bi-x"></i>
-      </button>
+      <button type="button" className="btn-close" onClick={props.onDeleted}></button>
     </li>
   );
 }
