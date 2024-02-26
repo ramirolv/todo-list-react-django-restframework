@@ -7,25 +7,33 @@ import { TodoList } from "./components/TodoList";
 import { TodoItem } from "./components/TodoItem";
 import { CreateItemButton } from "./components/CreateItemButton";
 
-const todoDefault = [
-  { text: "Comer pato al ajio", completed: true },
-  { text: "dormir", completed: true },
-  { text: "correr", completed: true },
-  { text: "almorzar", completed: false },
-];
+function useLocalState(itemName, initialValue){
+  const getStorage = () => JSON.parse(localStorage.getItem(itemName)) || initialValue;
+
+  const [items, setItems] = useState(getStorage());
+
+  const updateStorage = (itemsArray) => {
+    localStorage.setItem(itemName, JSON.stringify(itemsArray));
+  };
+  
+  const updateItems = (newItemsArray) => {
+    setItems(newItemsArray);
+    updateStorage(newItemsArray);
+  };
+
+  return [items, updateItems];
+}
 
 function App() {
-  const [tasks, setTasks] = useState(todoDefault);
+  const [tasks, setTasks] = useLocalState("Tasks_V1", []);
   const [searchValue, setSearchValue] = useState("");
   const completedTodo = tasks.filter((todo) => !!todo.completed).length;
   const totalTodo = tasks.length;
 
-  // Estado derivado
   const searchedTodo = tasks.filter((task) => {
     return task.text.toLowerCase().includes(searchValue.toLowerCase());
   });
 
-  // Estado derivado
   const completeTodo = (text) => {
     const newTasks = [...tasks];
     const index = newTasks.findIndex((todo) => todo.text === text);
@@ -33,7 +41,6 @@ function App() {
     setTasks(newTasks);
   };
 
-  //Estado derivado
   const deleteTodo = (text) => {
     const newTasks = [...tasks];
     const index = newTasks.findIndex((todo) => todo.text === text);
