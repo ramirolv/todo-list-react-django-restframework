@@ -1,7 +1,7 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User, Group
 from rest_framework import permissions
+from .permissions import UserViewSetPermissions
 
 from .serializers import UserSerializer, GroupSerializer
 
@@ -11,7 +11,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, permissions.DjangoModelPermissions]
+    permission_classes = [UserViewSetPermissions]
 
 
 class GroupViewSet(viewsets.ModelViewSet):
