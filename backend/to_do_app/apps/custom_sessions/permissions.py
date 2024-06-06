@@ -9,12 +9,12 @@ class UserViewSetPermissions(permissions.BasePermission):
 
         # Para otros usuarios, verificar los permisos específicos según la acción
         if request.method == 'GET':
-            return request.user.has_perm('auth.view_user')
+            return request.user.has_perm('custom_sessions.view_customuser')
         elif request.method == 'POST':
-            return request.user.has_perm('auth.add_user')
+            return request.user.has_perm('custom_sessions.add_customuser')
         elif request.method == 'PUT' or request.method == 'PATCH':
-            return request.user.has_perm('auth.change_user')
+            return request.user.has_perm('custom_sessions.change_customuser')
         elif request.method == 'DELETE':
-            return request.user.has_perm('auth.delete_user')
+            return request.user.has_perm('custom_sessions.delete_customuser')
 
         return False

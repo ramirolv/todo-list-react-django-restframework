@@ -173,6 +173,10 @@ SWAGGER_SETTINGS = {
     },
     'USE_SESSION_AUTH': False,
 }
+
+# Modelo para autenticacion
+AUTH_USER_MODEL = 'custom_sessions.CustomUser'
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
